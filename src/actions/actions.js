@@ -5,18 +5,12 @@ import axios from 'axios';
 //make our action objects;
 
 
-export const logIn = (e) => dispatch => {
-  const username = e.target[0].value, password = e.target[1].value;
-  console.log(2);
-  axios.post('/server/login',
-  { username, password })
-  .then((data) => {
-    console.log(3);
+export const logIn = (data) => dispatch => {
     dispatch({
         type: types.LOG_IN,
         payload: data,
     });
-})};
+};
 {/* <input type = 'text' placeholder = 'username'/>
 <input type = 'text' placeholder = 'password'/>
 <input type = 'text' placeholder = 'name'/>
