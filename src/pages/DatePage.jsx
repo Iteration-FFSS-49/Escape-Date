@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../../actions/actions.js';
+import * as actions from '../actions/actions.js';
 import { bindActionCreators } from 'redux';
 
 
@@ -17,7 +17,7 @@ const mapStateToProps = ({ dateState : { location, nameOfDate, timeOfDate, dateS
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
-const DateInstance = props => {
+const DatePage = props => {
     
     return  (
         <div>
@@ -37,4 +37,4 @@ const DateInstance = props => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(DateInstance);
+export default connect(mapStateToProps, mapDispatchToProps)(DatePage);

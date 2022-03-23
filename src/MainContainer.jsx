@@ -1,11 +1,10 @@
 import React from 'react';
-import LoginInformation from './components/loginPage/LoginInformation.jsx';
-import SignUpButton from './components/loginPage/SignUpButton.jsx';
 import logo from '../Images/Axolotl.png';
-import SignUpPage from './components/signupPage/SignUpPage.jsx';
-import DateInstance from './components/datePage/DateInstance.jsx';
+import SignUpPage from './pages/SignUpPage.jsx';
+import DatePage from './pages/DatePage.jsx';
+import LoginPage from './pages/LoginPage.jsx';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import ErrorPage from './components/errorPage/ErrorPage.jsx'; 
+import ErrorPage from './pages/ErrorPage.jsx'; 
 //import { connect } = 'react-redux';
 
 
@@ -15,10 +14,10 @@ const MainContainer = props => (
     <h1>Escape Date</h1>
       <Router>
         <Routes>
-          <Route path = '/' element={<><LoginInformation/><SignUpButton/></>}/>
-          <Route path = '/newUser-Contacts' element = {<SignUpPage />}/>
-          <Route path = '/newDate' element = {<DateInstance />}/>
-          <Route path = '/*' element = {<ErrorPage/>}/>
+          <Route path = '/' element={<LoginPage/>}/>
+          <Route path = '/signUp' element = {<SignUpPage />}/>
+          <Route path = '/newDate' element = {<DatePage />}/>
+          <Route path = '*' element = {<ErrorPage/>}/>
         </Routes>
       </Router>
   </div>
