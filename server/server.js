@@ -4,21 +4,15 @@ const path = require('path');
 const PORT = 3000;
 // const bodyParser = require('body-parser');
 const cors = require('cors');
-const signInRouter = require('./routers/signIn');
-const newUser = require('./routers/newUser')
-const dateRouter = require('./routers/dateRouter');
+const router = require('./routes/routers');
 
 app.use(cors());
 
 
-app.use(express.static(path.resolve(__dirname, '../dist/')))
 app.use(express.json());
+app.use(express.static(path.resolve(__dirname, '../dist/')))
 
-app.use('/server/login', signInRouter);
-
-app.use('/server/session', newUser);
-
-app.use('/server/newDate', dateRouter);
+app.use('/server/**', router);
 
 
 //global error handler
