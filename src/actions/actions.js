@@ -36,7 +36,6 @@ export const signUp = (e) => dispatch => {
   axios.post('/server/session/newUser',
   { username, password, name, phone, em1_name, em1_phone, em2_name, em2_phone, em3_name, em3_phone })
   .then(data => {
-    console.log(data);
     dispatch({
       type: types.SIGN_UP,
       payload: data

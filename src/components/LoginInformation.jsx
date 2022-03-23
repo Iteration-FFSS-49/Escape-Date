@@ -25,7 +25,6 @@ const LoginInformation = props => {
 
   useEffect(() => {
     if (props.hasSignedIn === true) navigate('/newDate')
-    console.log(props);
   },[props.hasSignedIn])
 
   
@@ -33,7 +32,6 @@ const LoginInformation = props => {
   <div className = 'form-container'>
     <form className = 'input-text' onSubmit = {(e) => {
       e.preventDefault();
-      console.log(1);
       const username = e.target[0].value, password = e.target[1].value;
       axios.post('/server/login', {username, password})
       .then((data) => {
