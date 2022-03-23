@@ -5,18 +5,12 @@ import axios from 'axios';
 //make our action objects;
 
 
-export const logIn = (e) => dispatch => {
-  const username = e.target[0].value, password = e.target[1].value;
-  console.log(2);
-  axios.post('/server/login',
-  { username, password })
-  .then((data) => {
-    console.log(3);
+export const logIn = (data) => dispatch => {
     dispatch({
         type: types.LOG_IN,
         payload: data,
     });
-})};
+};
 {/* <input type = 'text' placeholder = 'username'/>
 <input type = 'text' placeholder = 'password'/>
 <input type = 'text' placeholder = 'name'/>
@@ -42,7 +36,6 @@ export const signUp = (e) => dispatch => {
   axios.post('/server/session/newUser',
   { username, password, name, phone, em1_name, em1_phone, em2_name, em2_phone, em3_name, em3_phone })
   .then(data => {
-    console.log(data);
     dispatch({
       type: types.SIGN_UP,
       payload: data
