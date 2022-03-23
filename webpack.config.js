@@ -43,9 +43,8 @@ module.exports = {
     }),
   ],
   devServer: {
-    compress: true,
     proxy: {
-      '/**': 'http://localhost:3000/'
+      '/server/**': 'http://localhost:3000',
     },
   },
 };

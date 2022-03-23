@@ -4,7 +4,7 @@
   "description": "Team Ultimate Axolotl's scratch project",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack serve",
+    "dev": "webpack-dev-server --open --hot --progress --color & nodemon ./server/server.js",
     "build": "webpack",
     "start": "nodemon server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"

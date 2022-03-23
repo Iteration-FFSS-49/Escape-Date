@@ -8,7 +8,7 @@ import axios from 'axios';
 export const logIn = (e) => dispatch => {
   const username = e.target[0].value, password = e.target[1].value;
   console.log(2);
-  axios.post('/login',
+  axios.post('/server/login',
   { username, password })
   .then((data) => {
     console.log(3);
@@ -39,7 +39,7 @@ export const signUp = (e) => dispatch => {
   const em2_phone = e.target[7].value;
   const em3_name = e.target[8].value;
   const em3_phone = e.target[9].value;
-  axios.post('/session/newUser',
+  axios.post('/server/session/newUser',
   { username, password, name, phone, em1_name, em1_phone, em2_name, em2_phone, em3_name, em3_phone })
   .then(data => {
     console.log(data);
@@ -57,7 +57,7 @@ export const newDateInstance = (e) => dispatch => {
     const time = e.target[3].value; 
     const nameOfDate = e.target[4].value;
     const date = e.target[5].value; 
-    axios.post('http://localhost:3000/newDateInstance', 
+    axios.post('/server/newDateInstance', 
     {location, interval, primaryContact, time, nameOfDate, date})
     .then(data => {
       console.log(data); 

@@ -18,7 +18,7 @@ const MainContainer = props => (
           <Route path = '/' element={<><LoginInformation/><SignUpButton/></>}/>
           <Route path = '/newUser-Contacts' element = {<SignUpPage />}/>
           <Route path = '/newDate' element = {<DateInstance />}/>
-          <Route path = '/errorPage' element = {<ErrorPage/>}/>
+          <Route path = '/*' element = {<ErrorPage/>}/>
         </Routes>
       </Router>
   </div>
