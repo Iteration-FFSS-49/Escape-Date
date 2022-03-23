@@ -25,7 +25,7 @@ bcrypt.genSalt(rounds, function(err, salt){
         // console.log(hspw, 'password success?', hash);
         const queryString = `INSERT INTO users 
         (username, password, name, phone, 
-        em1_name, em1_phone, em2_name, 
+        em1_name, em1_phone, em2_name,
         em2_phone, em3_name, em3_phone)
         VALUES ('${req.body['username']}', 
         '${hash}', 
