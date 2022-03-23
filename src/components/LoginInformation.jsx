@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../../actions/actions.js';
+import * as actions from '../actions/actions.js';
 import { bindActionCreators } from 'redux';
 import { useNavigate } from 'react-router-dom'; 
-import ErrorPage from '../errorPage/ErrorPage.jsx'; 
 import 'regenerator-runtime/runtime';
 
 //two text inputs and a submit button. //create an onSubmit handler for the form that sets off our get request for username authentication.
@@ -59,6 +58,7 @@ const LoginInformation = props => {
       <input type='text' placeholder='username' />
       <input type='password' placeholder='password' />
       <button>login</button>
+      <button onClick={() => navigate('/signUp')}> Sign me up please! </button>
     </form>
   </div>
 )
