@@ -21,14 +21,14 @@ const dateReducer = ( state = initialState, action) => {
       //has signed in, emergency contact/primary, name of user.
       //console.log('at the reducer', action.payload);)
       // action.payload = action.payload.data;
-      if (!action.payload.data.err){
+      
       //grab the values for emergency contacts here and put them into an array of objects.
       const arr = [];
       console.log(4);
+      console.log('data is', action.payload.data)
       for (let i = 1; i <= 3; i++){
         arr.push({name: action.payload.data[`em${i}_name`], phone: action.payload.data[`em${i}_phone`] })
       }
-      
         return {
           ...state,
           hasSignedIn: true,
@@ -36,9 +36,6 @@ const dateReducer = ( state = initialState, action) => {
           emergencyContacts: arr,
           phoneNumber: action.payload.data.phone
         }
-      } else {
-        return state
-      }
     }
     
     case types.NEW_DATE_INSTANCE : {

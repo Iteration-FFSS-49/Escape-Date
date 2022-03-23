@@ -7,7 +7,7 @@
     "dev": "webpack-dev-server --open --hot --progress --color & nodemon ./server/server.js",
     "build": "webpack",
     "start": "nodemon server/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --config"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.0",
     "axios": "^0.26.1",
+    "babel-jest": "^27.5.1",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "pg": "^8.7.3",
@@ -47,6 +48,7 @@
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
     "image-webpack-loader": "^8.1.0",
+    "jest": "^27.5.1",
     "nodemon": "^2.0.15",
     "sass-loader": "^12.6.0",
     "style-loader": "^3.3.1",
