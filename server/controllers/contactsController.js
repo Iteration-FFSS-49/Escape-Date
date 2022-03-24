@@ -1,3 +1,4 @@
+const { values } = require("regenerator-runtime");
 const db = require("../../database/model");
 
 
@@ -12,14 +13,12 @@ const getId = async (username) => {
     const dbRes = await db.query(queryObj);
     return dbRes.rows[0].id
 
-  }catch(err){
+  }catch(err) {
     return next({
       log: 'error getting id',
       message: {err}
     })
   }
-
-
 }
 contactsController.addContact = async (req, res, next) => {
   // get the id from the username
@@ -80,6 +79,26 @@ contactsController.deleteContact = async(req, res, next) => {
   }catch(err){
     return next({
       log: 'error in contactsController.deleteContacts',
+      message: {err}
+    })
+  }
+}
+
+contactsController.updateContact = async (req, res, next) => {
+  const {username, oldPhone, oldName, newPhone, newName} = req.body
+  try {
+    const id = await getId(username);
+    const queryObj = {
+      text: `UPDATE contacts
+      SET phone = $1, name = $2
+      WHERE user_id = $3 AND phone = $4 AND name = $5`,
+      values: [newPhone, newName, id, oldPhone, oldName,]
+    };
+    await db.query(queryObj)
+    return next();
+  }catch(err){
+    return next({
+      log: 'error in contactsController.updateContact',
       message: {err}
     })
   }

@@ -5,6 +5,7 @@ import '../stylesheets/AddContactForm.scss'
 
 
 const AddContactForm = ({username, setAddContactForm}) => {
+
   const handleSubmit = async (e) => {
     console.log(e.target[0].value);
     const name = e.target[0].value;
@@ -18,6 +19,7 @@ const AddContactForm = ({username, setAddContactForm}) => {
         key = {'GOOD' + 123123} 
         text ='Success'
       />])
+      setTimeout(() => {setAddContactForm([])}, 1000);
       return;
     }catch(err){
       setAddContactForm([<Message 
@@ -25,14 +27,13 @@ const AddContactForm = ({username, setAddContactForm}) => {
         text ='Something went wrong. Please try again'
       />])
       return;
-    }
-
+      }
   }
   return (
     <div>
       <form id='addContact' onSubmit={(e)=>handleSubmit(e)}>
-        <input type = 'text' placeholder="Name.." required></input>
-        <input type = 'text' placeholder="Phone.." required></input>
+        <input type = 'text' placeholder="Name..." required></input>
+        <input type = 'text' placeholder="Phone..." required></input>
         <button>Submit</button>
       </form>
     </div>

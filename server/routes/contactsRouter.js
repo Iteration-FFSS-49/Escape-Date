@@ -18,4 +18,8 @@ router.delete('/delete', contactsController.deleteContact, (req,res) => {
   return res.status(200).json({message: 'contact has been deleted'});
 })
 
+router.patch('/update', contactsController.updateContact, (req,res) => {
+  return res.status(200).json({message: 'contact has been updated'});
+})
+
 module.exports = router

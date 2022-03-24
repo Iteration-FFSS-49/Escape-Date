@@ -11,7 +11,6 @@ const mapStateToProps = ({ dateState :  currentUser}) => (
 );
 
 const EmergencyContacts = (props) => {
-  console.log('EmergencyContacts', props.currentUser.em);
   //set state to add contact form
   const [addContactForm, setAddContactForm] = useState([]);
   const [showContacts, setShowContacts] = useState([]);
@@ -19,26 +18,25 @@ const EmergencyContacts = (props) => {
 
   // handle the on click function for adding
   const addContact = () => {
-    console.log('clicking');
     setAddContactForm([<AddContactForm 
       key= {1} 
       username={props.currentUser.username}
       setAddContactForm = {setAddContactForm}
-      />]);
+    />]);
   }
-  useEffect( async () => {
+  useEffect(async () => {
     try{
       const res = await axios.get(`/server/contacts/${props.currentUser.username}`)
-      console.log(res);
-      setShowContacts(res.data.contacts.map((el, i ) => <Contact 
+      setShowContacts(res.data.contacts.map((el, i ) => 
+      (<Contact 
         key = {el.name + i} 
         name = {el.name} 
         phone = {el.phone}
         username = {props.currentUser.username}
         numDeleted = {numDeleted}
         setNumDeleted = {setNumDeleted}
-      />))
-    }catch(err){
+      />)));
+    }catch(err) {
       console.log('fetching contacts err', err)
       return;
     }
@@ -51,7 +49,6 @@ const EmergencyContacts = (props) => {
         <button onClick= {addContact}>Add Contact</button>
         {addContactForm}
       </div>
-      {/* {props.currentUser.em.map((el, i) => <Contact key = {el.name + i} name = {el.name} phone = {el.phone}/>)} */}
       {showContacts}
     </div>
   );
