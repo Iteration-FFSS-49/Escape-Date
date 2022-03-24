@@ -2,4 +2,19 @@
   display: flex;
   gap: 20px;
   justify-content: center;
+  align-items: center;
+  #name{
+    width: 120px;
+  }
+  #phone{
+    width: 150px;
+  }
+  button{
+    height: 30px;
+  }
+}
+
+#DisplayEdit{
+  display: flex;
+  flex-direction: row;
 }

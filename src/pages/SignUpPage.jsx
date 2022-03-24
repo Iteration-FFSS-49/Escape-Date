@@ -28,7 +28,7 @@ const SignUpPage = props => {
   const navigate = useNavigate();
   
   const submitNewUser = (e) => {
-    e.preventDefault(),
+    e.preventDefault()
     console.log('targets array', e.target)
     const username = e.target[0].value;
     const password = e.target[1].value;
