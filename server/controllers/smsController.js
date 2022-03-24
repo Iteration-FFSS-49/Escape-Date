@@ -6,19 +6,24 @@ const accountSid = 'AC3fa06a3c37cf6fa2c801972cf7117851';
 const authToken = 'd29e2c91b4503fe49c6499a56692b19c';
 const client = require('twilio')(accountSid, authToken);
 
-const smsController = {};
+const SmsController = {};
 
-smsController.sendSOS = (req, res, next) =>{
-
+SmsController.sendSOS = (req, res, next) =>{
+console.log('from smscontroller.sendsos middleware!!!!', res.locals.contacts)
+for (let i = 0; i < res.locals.contacts.length; i++){
   client.messages
   .create({
-    body: 'SOS!!! Bad date!',
+    body: `SOS!!! Trash date!!! - Sent by ${req.query.name}`,
     from: '+13093265517',
-    to: '+18589975734' //req.body???
+    to: `${res.locals.contacts[i].phone}` 
   })
-    .then(message => console.log(message.sid));
-  
+    .then(message => console.log(message.sid))
+    .catch((err) => {
+      console.log(err)
+    })
+}
   next();
+
 }
 
-module.exports = smsController;
+module.exports = SmsController;

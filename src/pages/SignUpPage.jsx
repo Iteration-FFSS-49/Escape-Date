@@ -29,7 +29,9 @@ const SignUpPage = props => {
   
   const submitNewUser = (e) => {
     e.preventDefault()
-    console.log('targets array', e.target)
+    // console.log('targets array', e.target)
+    // console.log('targets array values?', e.target[0], e.target[1], e.target[2], e.target[3], e.target[4], e.target[5], e.target[6], e.target[7])
+
     const username = e.target[0].value;
     const password = e.target[1].value;
     const name = e.target[2].value;
@@ -51,8 +53,6 @@ const SignUpPage = props => {
       console.log(err)
       return;
     })
-
-
 
     navigate('/');
   } 
