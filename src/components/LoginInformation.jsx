@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { useNavigate } from 'react-router-dom'; 
 import 'regenerator-runtime/runtime';
 import axios from 'axios';
+// import OAuth from './OAuth.jsx';
 
 //two text inputs and a submit button. //create an onSubmit handler for the form that sets off our get request for username authentication.
 
@@ -46,7 +47,7 @@ const LoginInformation = props => {
       <input type='password' placeholder='password' />
       <button>login</button>
       <button onClick={() => navigate('/signUp')}> Sign me up please! </button>
-    </form>
+     </form>
   </div>
 )
 }
