@@ -34,7 +34,8 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
     "regenerator-runtime": "^0.13.9",
-    "sass": "^1.49.9"
+    "sass": "^1.49.9",
+    "twilio": "^3.76.0"
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",

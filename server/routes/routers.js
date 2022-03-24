@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const UserController =  require ('../controllers/userController.js')
 //import dateControlller
+const smsController = require('../controllers/send_sms.js')
 
 router.post('/newUser', UserController.createUser, (req, res) => {
     console.log('sending newUser response after creating account')
@@ -19,5 +20,9 @@ router.post('/login', UserController.logIn, (req, res) => {
 
 // })
 
+//route to send SOS message
+router.post('/sos', smsController.sendSOS, (req, res) => {
+    return res.status(200)
+})
 
 module.exports = router
