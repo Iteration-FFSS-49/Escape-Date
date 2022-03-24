@@ -11,6 +11,7 @@ const initialState = {
     timeOfDate: '',
     dateStatus: null, 
     interval: null,
+    currentUser: {}
   };
 
 //spin up an initial statye and create a fall through of reducers.a
@@ -25,15 +26,12 @@ const dateReducer = ( state = initialState, action) => {
       //grab the values for emergency contacts here and put them into an array of objects.
       const arr = [];
       // logic to handle emergency contacts returned from server
-      console.log(4);
-      console.log('data is', action.payload.data)
+      console.log('payload is', action.payload)
       // get the array from what the back end sends us as assign it to emergency Contacts
         return {
           ...state,
           hasSignedIn: true,
-          name: action.payload.data.name,
-          emergencyContacts: arr,
-          phoneNumber: action.payload.data.phone
+          currentUser: action.payload
         }
     }
     

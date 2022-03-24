@@ -10,9 +10,7 @@ import axios from 'axios';
 
 const mapStateToProps = ({ dateState }) => ({
   hasSignedIn: dateState.hasSignedIn,
-  emergencyContacts: dateState.emergencyContacts, 
-  primaryContact: dateState.primaryContact, 
-  name: dateState.name
+  currentUser: dateState.currentUser
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
@@ -36,11 +34,12 @@ const LoginInformation = props => {
       const username = e.target[0].value, password = e.target[1].value;
       axios.post('/server/login', {username, password})
       .then((data) => {
+        console.log('response data', data.data);
         if(data.data.err) {
           navigate('/errorPage')
           return;
         }
-        props.logIn(data);
+        props.logIn(data.data);
       });
     }}>
       <input type='text' placeholder='username' />

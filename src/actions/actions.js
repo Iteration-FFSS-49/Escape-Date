@@ -11,37 +11,13 @@ export const logIn = (data) => dispatch => {
         payload: data,
     });
 };
-{/* <input type = 'text' placeholder = 'username'/>
-<input type = 'text' placeholder = 'password'/>
-<input type = 'text' placeholder = 'name'/>
-<input type = 'text' placeholder = 'phone'/>
-<input type = 'text' placeholder = 'emergency name 1'/>
-<input type = 'text' placeholder = 'emergency number 1'/>
-<input type = 'text' placeholder = 'emergency name 2'/>
-<input type = 'text' placeholder = 'emergency number 2'/>
-<input type = 'text' placeholder = 'emergency name 3'/>
-<input type = 'text' placeholder = 'emergency number 3'/> */}
-export const signUp = (e) => dispatch => {
-  console.log('targets array', e.target)
-  const username = e.target[0].value;
-  const password = e.target[1].value;
-  const name = e.target[2].value;
-  const phone = e.target[3].value;
-  const emContacts = [];
-  // iterate through length-1 of e.target array starting at index=4
-  for (let i = 4; i < e.target.length - 1; i+=2){ 
-    emContacts.push({name: e.target[i].value, phone: e.target[i+1].value});
-  }
-  console.log('emContacts array!!!!!', emContacts)
 
-  axios.post('/server/session/newUser',
-  { username, password, name, phone, emContacts })
-  .then(data => {
-    dispatch({
-      type: types.SIGN_UP,
-      payload: data
-    })
+export const signUp = (currentUser) => dispatch => {
+  dispatch({
+    type: types.LOG_IN,
+    payload: currentUser
   })
+
 }
 
 export const newDateInstance = (e) => dispatch => {

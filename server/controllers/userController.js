@@ -22,22 +22,15 @@ UserController.createUser = (req, res, next) => {
             throw err
           } else {
             console.log('bcrypt')
-            // hspw = hash;
-            // console.log(hspw, 'password success?', hash);
-            //     CREATE TABLE users (
-            //   username, password, name, phone, 
-            // em1_name, em1_phone, em2_name,
-            // em2_phone, em3_name, em3_phone
-            // )
-            
+
             const queryStringUsers = {
               text: 'INSERT INTO users (username, password, name, phone) VALUES ($1, $2, $3, $4)',
-              values: [req.body.username, hash, req.body.name, req.body.phone]
+              values: [username, hash, req.body.name, req.body.phone]
             }
             
             const queryStringPrimaryId = {
               text: `SELECT users.id FROM users WHERE users.username = $1`,
-              values: [req.body.username]
+              values: [username]
             };
             // 1. query and INSERT username, password, phone
             //creates the primary key
@@ -53,7 +46,7 @@ UserController.createUser = (req, res, next) => {
                 console.log(`index at ${i}`)
                 const queryStringContacts = {
                   text: 'INSERT INTO contacts (user_id, phone, name) VALUES ($1, $2, $3)',
-                  values: [res.locals.id, req.body.em[i].objectPhone, req.body.em[i].objectName]
+                  values: [res.locals.id, req.body.em[i].phone, req.body.em[i].name]
                 }
                 await db.query(queryStringContacts);
   
@@ -68,45 +61,6 @@ UserController.createUser = (req, res, next) => {
                 message: {err}
               });
             }
-            // db.query(queryStringUsers)
-            // .then((data) => {
-            //   console.log('WE MADE IT')
-            //   //return next();
-            // })
-            // .catch((err) => {
-            //   return next({
-            //     log: 'error in db.query(queryStringUsers)',
-            //     message: {err}
-            //   });
-            // });
-
-            
-            // const findId = db.query(queryStringPrimaryId)
-            // .then((data) => {
-            //   res.locals.id = data.rows;
-            //   console.log('res.locals.id', res.locals.id);
-            // }).catch(err => {
-            //   return next({
-            //     log: 'error getting primary id',
-            //     message: {err}
-            //   })
-            // });
-
-            // for (let i = 0; i < req.body.em; i++){
-            //   const { em } = req.body.em
-            //   const queryString = `INSERT INTO contacts(user_id, phone, name)
-            //   VALUES (${findId}, ${em[i].objectPhone}, ${em[i].objectName})`
-            //   db.query(queryString)
-            //   .then(() => {
-            //     return next();
-            //   })
-            //   .catch((err) => {
-            //     return next({
-            //       log: 'error inserting into contacts',
-            //       message: {err}
-            //     });
-            //   });
-            // };
             }
         })
       }
@@ -120,25 +74,45 @@ UserController.logIn = (request, response, next) => {
     const password = request.body.password;
     const rounds = 10;
 
-            const queryString = `SELECT * FROM users WHERE username = '${username}';`
+            //const queryString = `SELECT * FROM users WHERE username = '${username}';`
+            const queryObject = {
+              text: 'SELECT * FROM users WHERE users.username = $1',
+              values: [username]
+            }
 
-            db.query(queryString)
+            db.query(queryObject)
             .then((data) => {
                 // console.log('data is', data);
                 if (data.rows[0] === undefined) {
                     response.locals.user = {err: 'Username does not exist'}
                     return next();
                 };
-                bcrypt.compare(password, data.rows[0].password, (err, res) => {
+                bcrypt.compare(password, data.rows[0].password, async (err, res) => {
                     // console.log('password is', password);
                     // console.log('real pass', data.rows[0].password)
                     if (err) {
                         console.log(err)
-                        return 
+                        return next({
+                          log: 'bcrypt password compare err',
+                          message: {err}
+                        })
                     }
                     if (res === true) {
                         console.log('logged in')
-                        response.locals.user = data.rows[0];
+                        const {username, name, phone, id} = data.rows[0];
+                        const queryObj = {
+                          text: 'SELECT c.name, c.phone from contacts c WHERE c.user_id = $1',
+                          values: [id] 
+                        }
+                        const dbRes = await db.query(queryObj);
+                        response.locals.user = {
+                          name: data.rows[0].name,
+                          username: data.rows[0].username,
+                          phone: data.rows[0].phone,
+                          em: dbRes.rows
+                        }
+                        console.log('res.locals.user', response.locals.user);
+
                         return next();
                     } else {
                         console.log('incorrect password');

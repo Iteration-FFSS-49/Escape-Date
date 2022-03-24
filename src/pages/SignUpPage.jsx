@@ -4,6 +4,7 @@ import * as actions from '../actions/actions.js';
 import { bindActionCreators } from 'redux'; 
 import { useNavigate } from 'react-router-dom';
 import '../stylesheets/SignUp.scss';
+import axios from 'axios';
 
 
 import EmergencyContact from '../components/EmergencyContact.jsx';
@@ -28,10 +29,32 @@ const SignUpPage = props => {
   
   const submitNewUser = (e) => {
     e.preventDefault(),
-    props.signUp(e);
+    console.log('targets array', e.target)
+    const username = e.target[0].value;
+    const password = e.target[1].value;
+    const name = e.target[2].value;
+    const phone = e.target[3].value;
+    const em = [];
+    // iterate through length-1 of e.target array starting at index=4
+    for (let i = 4; i < e.target.length - 1; i+=2) { 
+      em.push({name: e.target[i].value, phone: e.target[i+1].value});
+    }
+    console.log('emContacts array!!!!!', em)
+  
+    axios.post('/server/newUser',
+    { username, password, name, phone, em })
+    .then(()=> {
+      props.signUp({username,password,name,phone,em});
+      navigate('/myAccount')
+    }).catch(err => {
+      alert('Account already exists');
+      console.log(err)
+      return;
+    })
+
+
+
     navigate('/');
-    const myState = store.getState();
-    console.log(myState);
   } 
   return (
   <div className = 'form-container'>
