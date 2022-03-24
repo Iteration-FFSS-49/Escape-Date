@@ -39,6 +39,7 @@ button {
   border: solid 1px rgb(160, 149, 149);
   padding: 6px;
   box-shadow: 0 4px 12px 0 rgb(136, 146, 187);
+
 }
 
 form {
@@ -56,4 +57,10 @@ form {
 
 h1{
   color: rgb(114, 122, 156); 
+}
+
+button:hover{
+    background-color:rgb(166, 175, 212);
+    cursor: pointer;
+
 }
