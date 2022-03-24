@@ -3,7 +3,7 @@
 // and set the environment variables. See http://twil.io/secure
 
 const accountSid = 'AC3fa06a3c37cf6fa2c801972cf7117851';
-const authToken = 'd29e2c91b4503fe49c6499a56692b19c';
+const authToken = '98763bae234da5b895cd0bbe4a90ba02';
 const client = require('twilio')(accountSid, authToken);
 
 const SmsController = {};
