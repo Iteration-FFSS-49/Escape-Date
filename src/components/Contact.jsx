@@ -29,7 +29,7 @@ const Contact = ({name, phone, username, numDeleted, setNumDeleted}) => {
     setTimeout(() => {
       setshowUpdating(false);
       setNumDeleted(numDeleted + 1);
-    },200);
+    },500);
     
   }
 
