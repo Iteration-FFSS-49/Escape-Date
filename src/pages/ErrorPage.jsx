@@ -1,5 +1,5 @@
 import React from 'react'; 
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 
 const ErrorPage = props => {
@@ -7,7 +7,7 @@ const ErrorPage = props => {
 return (
     <div className = 'error'>
         <p className = 'error-page'>Oopsies! This ultimate little axolotl doesn't recognize you.</p>
-        <button onClick = {() => navigate('/')}>Maybe try again?</button>
+        <Link to='/'><button>Maybe try again?</button></Link>
         <button onClick = {() => navigate('/newUser-Contacts')}>Create an account</button>
     </div>
 )

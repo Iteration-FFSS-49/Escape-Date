@@ -24,6 +24,7 @@ const LoginInformation = props => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log('props', props);
     if (props.hasSignedIn === true) navigate('/myAccount')
   },[props.hasSignedIn])
 
@@ -35,9 +36,9 @@ const LoginInformation = props => {
       const username = e.target[0].value, password = e.target[1].value;
       axios.post('/server/login', {username, password})
       .then((data) => {
-        console.log(data); // {}
-        if(data.data.err){
+        if(data.data.err) {
           navigate('/errorPage')
+          return;
         }
         props.logIn(data);
       });
