@@ -41,8 +41,15 @@ contactsController.addContact = async (req, res, next) => {
   console.log('add contacts middleware');
   return next();
 }
+
 contactsController.getContacts = async (req, res, next) => {
-  const {username} = req.params;
+  let username;
+  if (req.query.username) {
+    username = req.query.username
+  } else username = req.params.username; 
+  
+  console.log('this is in contact controller: req.params is', req.params)
+  console.log('this is in contact controller: req.query is', req.query)
   console.log(username);
   try{
     const id = await getId(username); 
@@ -53,6 +60,7 @@ contactsController.getContacts = async (req, res, next) => {
     const dbRes = await db.query(queryObj);
     console.log(dbRes.rows);
     res.locals.contacts = dbRes.rows;
+    res.locals.username = username;
     next();
 
   }catch(err){
@@ -62,6 +70,8 @@ contactsController.getContacts = async (req, res, next) => {
     })
   }
 }
+
+
 contactsController.deleteContact = async(req, res, next) => {
   const {username, name, phone} = req.body
   console.log('username', username);
