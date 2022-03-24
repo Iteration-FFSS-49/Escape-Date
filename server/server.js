@@ -5,6 +5,7 @@ const PORT = 3000;
 // const bodyParser = require('body-parser');
 const cors = require('cors');
 const router = require('./routes/routers');
+const contactsRouter = require('./routes/contactsRouter');
 
 app.use(cors());
 
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(express.static(path.resolve(__dirname, '../dist/')))
 
 app.use('/server', router);
+app.use('/server/contacts', contactsRouter);
 
 
 //global error handler
