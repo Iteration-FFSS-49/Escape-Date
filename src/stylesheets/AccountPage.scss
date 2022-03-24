@@ -1,0 +1,25 @@
+.accountButtons{
+  width: 200px;
+}
+
+.linkButtons{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h2 {
+    margin-top: 0px;
+  }
+
+}
+
+.link{
+  text-decoration: none;
+}
+
+.SOS{
+  font-size: 30px;
+  padding-top: 10px;
+  margin: 30px;
+  height: 50px;
+  width: 400px;
+}

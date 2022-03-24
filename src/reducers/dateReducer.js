@@ -24,11 +24,10 @@ const dateReducer = ( state = initialState, action) => {
       
       //grab the values for emergency contacts here and put them into an array of objects.
       const arr = [];
+      // logic to handle emergency contacts returned from server
       console.log(4);
       console.log('data is', action.payload.data)
-      for (let i = 1; i <= 3; i++){
-        arr.push({name: action.payload.data[`em${i}_name`], phone: action.payload.data[`em${i}_phone`] })
-      }
+      // get the array from what the back end sends us as assign it to emergency Contacts
         return {
           ...state,
           hasSignedIn: true,

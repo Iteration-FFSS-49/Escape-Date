@@ -22,19 +22,20 @@ export const logIn = (data) => dispatch => {
 <input type = 'text' placeholder = 'emergency name 3'/>
 <input type = 'text' placeholder = 'emergency number 3'/> */}
 export const signUp = (e) => dispatch => {
-  console.log('here is hitting the front end before fetch ', e)
+  console.log('targets array', e.target)
   const username = e.target[0].value;
   const password = e.target[1].value;
   const name = e.target[2].value;
   const phone = e.target[3].value;
-  const em1_name = e.target[4].value;
-  const em1_phone = e.target[5].value;
-  const em2_name = e.target[6].value;
-  const em2_phone = e.target[7].value;
-  const em3_name = e.target[8].value;
-  const em3_phone = e.target[9].value;
+  const emContacts = [];
+  // iterate through length-1 of e.target array starting at index=4
+  for (let i = 4; i < e.target.length - 1; i+=2){ 
+    emContacts.push({name: e.target[i].value, phone: e.target[i+1].value});
+  }
+  console.log('emContacts array!!!!!', emContacts)
+
   axios.post('/server/session/newUser',
-  { username, password, name, phone, em1_name, em1_phone, em2_name, em2_phone, em3_name, em3_phone })
+  { username, password, name, phone, emContacts })
   .then(data => {
     dispatch({
       type: types.SIGN_UP,
