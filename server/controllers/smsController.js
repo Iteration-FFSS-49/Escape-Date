@@ -2,8 +2,12 @@
 // Find your Account SID and Auth Token at twilio.com/console
 // and set the environment variables. See http://twil.io/secure
 
-const accountSid = 'AC3fa06a3c37cf6fa2c801972cf7117851';
-const authToken = '98763bae234da5b895cd0bbe4a90ba02';
+require('dotenv').config();
+const { TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN } = require('../../twilio.js')
+
+
+const accountSid = TWILIO_ACCOUNT_SID;
+const authToken = TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
 
 const SmsController = {};
