@@ -17,7 +17,12 @@ export const signUp = (currentUser) => dispatch => {
     type: types.LOG_IN,
     payload: currentUser
   })
+}
 
+export const logOut = () => dispatch => {
+  dispatch({
+    type: types.LOG_OUT,
+  })
 }
 
 export const newDateInstance = (e) => dispatch => {

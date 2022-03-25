@@ -14,7 +14,10 @@ router.post('/newUser', UserController.createUser, (req, res) => {
 
 router.post('/login', UserController.logIn, (req, res) => {
     return res.status(200).json(res.locals.user)
-} )
+})
+router.patch('/changePassword', UserController.changePassword, (req, res) => {
+    return res.status(200).json({message: "Password has been changed"});
+})
 
 //create a route to /newDate endpoint passing in date controller
 
