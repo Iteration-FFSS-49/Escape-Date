@@ -13,6 +13,7 @@ const UpdatePasswordForm = ({username, setPasswordUpdate}) => {
       return;
     }
     const password = e.target[0].value;
+    //LALALAL
 
     e.preventDefault()
     setPasswordUpdate(false);
