@@ -2,7 +2,7 @@ const db = require("../../database/model");
 const bcrypt = require('bcrypt');
 
 const UserController = {};
-
+const rounds = 10;
 UserController.createUser = (req, res, next) => {
 
   console.log('Here is a body, and hopefully its here ', req.body);
@@ -10,7 +10,6 @@ UserController.createUser = (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
   const rounds = 10;
-
   // let hspw;
   bcrypt.genSalt(rounds, function(err, salt){
     if (err){
@@ -126,7 +125,40 @@ UserController.logIn = (request, response, next) => {
                 errObj.message = {err: 'controller.signIn.user error'};
                 return next(errObj);
             })
-        }
+}
+UserController.changePassword = (req, res, next) => {
+  console.log('getting to change password', req.body);
+  const {username, password} = req.body;
+  bcrypt.genSalt(rounds, function(err, salt) {
+    if (err) {
+      return next({
+        log: 'error creating salt in UserController.changePassword',
+        message: {err}
+      })
+    }
+    bcrypt.hash(password, salt, async (err, hash) => {
+      if (err) {
+        return next({
+          log: 'error hashing password in UserController.changePassword',
+          message: {err}
+        })
+      }
+      const queryObj = {
+        text: 'UPDATE users SET password = $1 WHERE users.username = $2',
+        values: [hash, username]
+      }
+      try {
+        await db.query(queryObj);
+        return next();
+      }catch(err) {
+        return next({
+          log: 'error querying database',
+          message: {err}
+        })
+      }
+    })
+  })
+} 
 
 
 module.exports = UserController;

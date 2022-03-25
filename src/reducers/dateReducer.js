@@ -47,6 +47,13 @@ const dateReducer = ( state = initialState, action) => {
         interval
       }
     }
+    case types.LOG_OUT: {
+      return{
+        ...state,
+        hasSignedIn: false,
+        currentUser: {},
+      }
+    }
     default: {
       return state;
     }
